@@ -1,0 +1,23 @@
+[package]
+name = "enuma"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1"
+log = "0.4.14"
+pollster = "0.2"
+render = { path = "./render" }
+logger = { path = "./logger"}
+
+[workspaces]
+members = [
+    "physics",
+    "logger",
+    "render"
+]
+
+[env]
+WAYLAND_DISPLAY = ""
