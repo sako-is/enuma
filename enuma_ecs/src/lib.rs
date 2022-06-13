@@ -35,25 +35,14 @@ impl Component {
         let mut properties = HashMap::new();
 
         for name in names.iter() {
-            for part in parts.iter() {
-                properties.insert(name.to_string(), *part);
+            for part in parts.into_iter() {
+                properties.insert(name.to_string(), part);
             }
         }
 
         Self { properties }
     }
 }
-
-// pub trait Component<T> {
-//     fn new(&self, names: [&str], properties: [Type]) -> Self {
-//         let mut components = HashMap::new();
-//         for name in names.iter() {
-//             for property in properties.iter() {
-//                 components.insert(name, property);
-//             }
-//         }
-//     }
-// }
 
 #[cfg(test)]
 mod tests {
