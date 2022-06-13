@@ -1,2 +1,4 @@
 /target
+/render/src/unlib.rs
+/render/src/delib.rs
 Cargo.lock
