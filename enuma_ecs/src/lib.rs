@@ -36,7 +36,7 @@ impl Component {
 
         for name in names.iter() {
             for part in parts.iter() {
-                properties.insert(name, *part);
+                properties.insert(name.to_string(), *part);
             }
         }
 
