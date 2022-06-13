@@ -11,12 +11,14 @@ log = "0.4.14"
 pollster = "0.2"
 render = { path = "./render" }
 logger = { path = "./logger"}
+enuma_ecs = { path = "./enuma_ecs"}
 
 [workspaces]
 members = [
     "physics",
     "logger",
-    "render"
+    "render",
+    "enuma_ecs"
 ]
 
 [env]
