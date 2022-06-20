@@ -9,6 +9,8 @@ edition = "2021"
 anyhow = "1"
 log = "0.4.14"
 pollster = "0.2"
+toml = "0.5.9"
+# enuma stuff
 render = { path = "./render" }
 logger = { path = "./logger"}
 enuma_ecs = { path = "./enuma_ecs"}

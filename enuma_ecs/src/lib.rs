@@ -15,7 +15,7 @@ use std::fmt::Debug;
 
 #[derive(Debug)]
 pub struct Entity {
-    name: String,
+    name:       String,
     components: Vec<Component>
 }
 
@@ -35,7 +35,7 @@ impl Component {
         let mut properties = HashMap::new();
 
         for name in names.iter() {
-            for part in parts.into_iter() {
+            for part in parts.iter() {
                 properties.insert(name.to_string(), part);
             }
         }
