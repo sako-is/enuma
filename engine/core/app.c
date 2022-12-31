@@ -7,10 +7,11 @@
 #include <stdbool.h>
 
 #include "log/logger.h"
-#include "draw/draw.h"
+#include "render/render.h"
+#include "strings.h"
 
 void starting() {
-    E_ERROR("hello\n");
+    E_DEBUG("hello\n");
 };
 
 Engine createEngine(int w, int h, Backend backend, const char* name) {
@@ -28,7 +29,7 @@ Engine createEngine(int w, int h, Backend backend, const char* name) {
     };
 
     memset(engine.name, '\0', strlen(name));
-    strcpy(engine.name, name);
+    stringCopy(engine.name, name);
 
     return engine;
 } 
@@ -39,26 +40,31 @@ void startEngine(Engine* engine) {
 
     while(!glfwWindowShouldClose(engine->window)) {
         glfwPollEvents();
+        // if there is an update function defined, do that as well
         if(engine->Update) engine->Update();   
+        // TODO: add support for entities having their function run
     }
 }
 
-
 void destroyEngine(Engine* engine) {
-    vkDestroyInstance(engine->instance.instance, NULL);
+    vkDestroyInstance(engine->instance.vulkan.vk, NULL);
+    free(engine->instance.vulkan.extensions);
     glfwDestroyWindow(engine->window);
     glfwTerminate();
 
     free(engine->name);
+    engine->instance.vulkan.extensions = NULL;
     engine->name = NULL;
 }
 
+// ----------------------------------------------------------------------------
+// Testing                                                                    |
+// ----------------------------------------------------------------------------
 int main() {
     Engine engine = createEngine(640, 800, Vulkan, "Title");
 
     engine.onStart = &starting;
 
     startEngine(&engine);
-
     destroyEngine(&engine);
 }

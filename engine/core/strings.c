@@ -25,6 +25,10 @@ char* stringDuplicate(const char* str) {
     return copy;
 }
 
+char* stringCopy(char* dest, const char* src) {
+    return strncpy(dest, src, sizeof(&dest));
+}
+
 int32 stringFormat(char* dest, const char* fmt, ...) {
     if (dest) {
         __builtin_va_list arg_ptr;

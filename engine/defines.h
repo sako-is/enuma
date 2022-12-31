@@ -12,6 +12,8 @@
 
 #define typeof __typeof
 
+#define defer(value, type, message) { goto defer; type("%s", message); return value; }
+
 #ifdef ENM_EXPORT
 	// Exports
 	#ifdef _MSC_VER

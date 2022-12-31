@@ -2,6 +2,8 @@
 
 #if EPLATFORM_WINDOWS
 
+#include "log/logger.h"
+
 #include <windows.h>
 #include <windowsx.h>  // param input extraction
 #include <stdio.h>
@@ -9,6 +11,13 @@
 
 static float64 clock_frequency;
 static LARGE_INTEGER start_time;
+
+void clock_setup() {
+    LARGE_INTEGER frequency;
+    QueryPerformanceFrequency(&frequency);
+    clock_frequency = 1.0 / (float64)frequency.QuadPart;
+    QueryPerformanceCounter(&start_time);
+}
 
 void* pAllocate(uint64 size, bool aligned) {
     return malloc(size);
@@ -62,7 +71,7 @@ float64 getAbsoluteTime() {
     return (float64)now_time.QuadPart * clock_frequency;
 }
 
-void Sleep(uint64 ms) {
+void pSleep(uint64 ms) {
     Sleep(ms);
 }
 

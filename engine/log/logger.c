@@ -30,7 +30,7 @@ void log_output(LogLevel level, const char* message, ...) {
 	va_end(arg_ptr);
 
 	// Prepend log level to message.
-	stringFormat(out_message, "%s%s\n", level_strings[level], out_message);
+	stringFormat(out_message, "%s%s", level_strings[level], out_message);
 
 	// Print accordingly
 	if (is_error) {

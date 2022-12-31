@@ -4,6 +4,7 @@
 
 ENMAPI uint64 stringLength(const char* str);
 ENMAPI char* stringDuplicate(const char* str);
+ENMAPI char* stringCopy(char* dest, const char* src);
 
 ENMAPI bool stringIsEqual(const char* str1, const char* str2);
 

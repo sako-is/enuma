@@ -80,4 +80,3 @@ bool vectorDelete(Vector *vec, int index) {
 
 	return true;
 }
-

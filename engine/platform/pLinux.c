@@ -41,13 +41,13 @@ void pWrite(const char* message, uint8 color) {
     // FATAL,ERROR,WARN,INFO,DEBUG,TRACE
     const char* color_strings[] = {"0;41", "1;31", "1;33", "1;32", "1;34", "1;30"};
     printf("\033[%sm%s\033[0m", color_strings[color], message);
-    printf("\033[%sm%s\033[0m", color_strings[1], "");
+    // printf("\033[%sm%s\033[0m", "1;97", "");
 }
 void pWriteError(const char* message, uint8 color) {
     // FATAL,ERROR,WARN,INFO,DEBUG,TRACE
     const char* color_strings[] = {"0;41", "1;31", "1;33", "1;32", "1;34", "1;30"};
     printf("\033[%sm%s\033[0m", color_strings[color], message);
-    printf("\033[%sm%s\033[0m", color_strings[1], "");
+    // printf("\033[%sm%s\033[0m", "1;97", " ");
 }
 
 float64 getAbsoluteTime() {
@@ -60,7 +60,7 @@ float64 getAbsoluteTime() {
     #endif
 }
 
-void Sleep(uint64 ms) {
+void pSleep(uint64 ms) {
 #if _POSIX_C_SOURCE >= 199309L
     struct timespec ts;
     ts.tv_sec = ms / 1000;

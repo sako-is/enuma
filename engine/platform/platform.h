@@ -18,6 +18,6 @@ void pWriteError(const char* message, uint8 color);
 
 ENMAPI float64 getAbsoluteTime();
 
-void Sleep(uint64 ms);
+void pSleep(uint64 ms);
 
 int32 getProcessorCount();
