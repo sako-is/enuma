@@ -25,11 +25,11 @@ char* stringDuplicate(const char* str) {
     return copy;
 }
 
-int stringCopy(char* dest, const char* src) {
+char* stringCopy(char* dest, const char* src) {
     #ifdef EPLATFORM_WINDOWS
     return strncpy_s(dest, sizeof(&dest), src, sizeof(&dest));
     #else
-    return strncpy(dest, src, sizeof(dest));
+    return strncpy(dest, src, sizeof(&dest));
     #endif
 }
 
