@@ -11,60 +11,69 @@
 #include "strings.h"
 
 void starting() {
-    E_DEBUG("hello\n");
-};
+	E_DEBUG("hello\n");
+}
+
+void errorCallback(int error, const char* description) {
+	E_ERROR("GLFW %s\n", description);
+}
 
 Engine createEngine(int w, int h, Backend backend, const char* name) {
-    glfwInit();
+	glfwSetErrorCallback(errorCallback);
+	glfwInit();
 
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    Engine engine = {
-        .w = w,
-        .h = h,
-        .backend = backend,
-        .window = glfwCreateWindow(w, h, name, NULL, NULL),
-        .name = malloc(strlen(name))
-    };
+	Engine engine = {
+		.w = w,
+		.h = h,
+		.backend = backend,
+		.window = glfwCreateWindow(w, h, name, glfwGetPrimaryMonitor(), NULL),
+		.name = malloc(strlen(name))
+	};
 
-    memset(engine.name, '\0', strlen(name));
-    stringCopy(engine.name, name);
+    glfwMakeContextCurrent(engine.window);
 
-    return engine;
-} 
+	memset(engine.name, '\0', strlen(name));
+	stringCopy(engine.name, name);
+
+	return engine;
+}
 
 void startEngine(Engine* engine) {
-    engine->instance = initRender(engine);
-    if(engine->onStart) engine->onStart();
+	engine->instance = initRender(engine);
+	if(engine->onStart) engine->onStart();
 
-    while(!glfwWindowShouldClose(engine->window)) {
-        glfwPollEvents();
-        // if there is an update function defined, do that as well
-        if(engine->Update) engine->Update();   
-        // TODO: add support for entities having their function run
-    }
+	while(!glfwWindowShouldClose(engine->window)) {
+		glfwPollEvents();
+		// if there is an update function defined, do that as well
+		if(engine->Update) engine->Update();   
+		// TODO: add support for entities having their function run
+	}
 }
 
 void destroyEngine(Engine* engine) {
-    vkDestroyInstance(engine->instance.vulkan.vk, NULL);
-    free(engine->instance.vulkan.extensions);
-    glfwDestroyWindow(engine->window);
-    glfwTerminate();
+	vkDestroyInstance(engine->instance.vulkan.vk, NULL);
+	free(engine->instance.vulkan.extensions);
+	glfwDestroyWindow(engine->window);
+	glfwTerminate();
 
-    free(engine->name);
-    engine->instance.vulkan.extensions = NULL;
-    engine->name = NULL;
+	free(engine->name);
+	engine->instance.vulkan.extensions = NULL;
+	engine->name = NULL;
 }
 
 // ----------------------------------------------------------------------------
 // Testing                                                                    |
 // ----------------------------------------------------------------------------
-int main() {
-    Engine engine = createEngine(640, 800, Vulkan, "Title");
+int main(void) {
+	Engine engine = createEngine(640, 800, Vulkan, "Title");
 
-    engine.onStart = &starting;
+	engine.onStart = &starting;
 
-    startEngine(&engine);
-    destroyEngine(&engine);
+	startEngine(&engine);
+	destroyEngine(&engine);
+
+	return 0;
 }

@@ -39,7 +39,7 @@ void* pSetMemory(void *dest, int32 value, uint64 size) {
     return memset(dest, value, size);
 }
 
-void consoleWrite(const char *message, uint8 color) {
+void pWrite(const char *message, uint8 color) {
     HANDLE console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
     // FATAL,ERROR,WARN,INFO,DEBUG,TRACE
     static uint8 levels[6] = {64, 4, 6, 2, 1, 8};
@@ -50,7 +50,7 @@ void consoleWrite(const char *message, uint8 color) {
     WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), message, (DWORD)length, number_written, 0);
 }
 
-void consoleWriteError(const char *message, uint8 color) {
+void pWriteError(const char *message, uint8 color) {
     HANDLE console_handle = GetStdHandle(STD_ERROR_HANDLE);
     // FATAL,ERROR,WARN,INFO,DEBUG,TRACE
     static uint8 levels[6] = {64, 4, 6, 2, 1, 8};

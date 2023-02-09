@@ -25,8 +25,8 @@ char* stringDuplicate(const char* str) {
     return copy;
 }
 
-char* stringCopy(char* dest, const char* src) {
-    return strncpy(dest, src, sizeof(&dest));
+int stringCopy(char* dest, const char* src) {
+    return strncpy_s(dest, sizeof(&dest), src, sizeof(&dest));
 }
 
 int32 stringFormat(char* dest, const char* fmt, ...) {

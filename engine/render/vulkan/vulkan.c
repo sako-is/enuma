@@ -5,7 +5,7 @@
 #include "core/app.h"
 #include "containers/vector.h"
 
-#include <vulkan.h>
+#include <vulkan/vulkan.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

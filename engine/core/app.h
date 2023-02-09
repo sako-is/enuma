@@ -1,7 +1,7 @@
 #pragma once
 
 #include <GLFW/glfw3.h>
-#include <vulkan.h>
+#include <vulkan/vulkan.h>
 
 #include "defines.h"
 #include "containers/vector.h"
