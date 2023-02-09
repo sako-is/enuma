@@ -26,7 +26,11 @@ char* stringDuplicate(const char* str) {
 }
 
 int stringCopy(char* dest, const char* src) {
+    #ifdef EPLATFORM_WINDOWS
     return strncpy_s(dest, sizeof(&dest), src, sizeof(&dest));
+    #else
+    return strncpy(dest, src, sizeof(dest));
+    #endif
 }
 
 int32 stringFormat(char* dest, const char* fmt, ...) {
